@@ -5,28 +5,31 @@ import { ImageGallery } from './ImageGallery/ImageGallery';
 import { SearchBar } from './Searchbar/Searchbar';
 import { Loader } from './Loader/Loader';
 import { Modal } from './Modal/Modal';
-import { fetchPhoto } from 'api/request';
+import PixabayApi from '../static/api/PixabayApi';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
-  const [images, setImages] = useState([]);
+  const [pictures, setImages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [modalUrl, setModalUrl] = useState('');
+  const [descr, setDescr] = useState('');
 
-  const onChangeSerchQuery = query => {
+  const onChangeQuery = query => {
     setImages([]);
     setCurrentPage(1);
     setSearchQuery(query);
     setError(null);
   };
 
-  const fetchImages = useCallback(async () => {
+  const picsFetch = useCallback(async () => {
     setIsLoading(true);
     try {
-      const response = await fetchPhoto({
+      const response = await PixabayApi({
         page: currentPage,
         searchQuery: searchQuery,
       });
@@ -39,20 +42,21 @@ export const App = () => {
     }
   }, [searchQuery, currentPage]);
 
-  const toggleModal = largeUrl => {
+  const toggleModal = (largeUrl, descr) => {
     setShowModal(!showModal);
     setModalUrl(largeUrl);
+    setDescr(descr);
   };
 
-  const handleClickLoadMore = () => {
+  const handleClickMoreBtn = () => {
     setCurrentPage(prev => prev + 1);
   };
 
   useEffect(() => {
     if (searchQuery) {
-      fetchImages();
+      picsFetch();
     }
-  }, [searchQuery, currentPage, fetchImages]);
+  }, [searchQuery, currentPage, picsFetch]);
 
   useEffect(() => {
     if (error) {
@@ -62,15 +66,20 @@ export const App = () => {
 
   return (
     <div className="App">
-      <SearchBar onSubmit={onChangeSerchQuery} />
+      <SearchBar onSubmit={onChangeQuery} />
       <div>
-        <ImageGallery images={images} onClick={toggleModal} />
+        <ImageGallery pictures={pictures} onClick={toggleModal} />
       </div>
-      {images.length % 12 < 1 && images.length > 0 && (
-        <ButtonLoadMore onClick={handleClickLoadMore} />
+      <span className="Button_wrapper">
+        {pictures.length % 12 < 1 && pictures.length > 0 && (
+          <ButtonLoadMore onClick={handleClickMoreBtn} />
+        )}
+        <Loader loading={isLoading} />
+      </span>
+      {showModal && (
+        <Modal url={modalUrl} descr={descr} toggleModal={toggleModal} />
       )}
-      <Loader loading={isLoading} />
-      {showModal && <Modal url={modalUrl} toggleModal={toggleModal} />}
+      <ToastContainer />
     </div>
   );
 };

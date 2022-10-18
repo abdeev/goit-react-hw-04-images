@@ -1,15 +1,16 @@
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 import PropTypes from 'prop-types';
 
-export const ImageGallery = ({ images, onClick }) => {
+export const ImageGallery = ({ pictures, onClick }) => {
   return (
     <ul className="ImageGallery">
-      {images.map(image => {
+      {pictures.map(pic => {
         return (
           <ImageGalleryItem
-            key={image.webformatURL}
-            webformatURL={image.webformatURL}
-            largeImageURL={image.largeImageURL}
+            key={pic.webformatURL}
+            webformatURL={pic.webformatURL}
+            descr={pic.tags}
+            largeImageURL={pic.largeImageURL}
             onClick={onClick}
           />
         );
@@ -19,6 +20,6 @@ export const ImageGallery = ({ images, onClick }) => {
 };
 
 ImageGallery.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.shape),
+  pictures: PropTypes.arrayOf(PropTypes.shape),
   onClick: PropTypes.func,
 };

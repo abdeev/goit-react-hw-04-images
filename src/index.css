@@ -1,7 +1,6 @@
 @import-normalize;
 /* bring in normalize.css styles */
 
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -98,7 +97,6 @@ img {
   opacity: 1;
 }
 
-
 .SearchForm-input {
   display: inline-block;
   width: 100%;
@@ -170,8 +168,21 @@ img {
 }
 
 .Modal {
+  position: relative;
   max-width: calc(100vw - 48px);
   max-height: calc(100vh - 24px);
+  border-radius: 30px;
+  overflow: hidden;
+}
+.description_modal {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 42px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  text-shadow: 0px 0px 4px rgba(165, 165, 168, 1);
 }
 
 /*
@@ -208,4 +219,12 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.Button_wrapper {
+  display: flex;
+  width: 300px;
+  margin: 0 auto;
+  gap: 10px;
+  justify-content: left;
+  align-content: center;
 }

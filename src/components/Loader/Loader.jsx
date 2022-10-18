@@ -1,17 +1,18 @@
 import PropTypes from 'prop-types';
-import { ColorRing } from 'react-loader-spinner';
+import { MagnifyingGlass } from 'react-loader-spinner';
 export const Loader = ({ loading }) => {
   return (
     <div className="Loader">
       {loading && (
-        <ColorRing
+        <MagnifyingGlass
           visible={true}
-          height="80"
-          width="80"
-          ariaLabel="blocks-loading"
+          height="40"
+          width="40"
+          ariaLabel="MagnifyingGlass-loading"
           wrapperStyle={{}}
-          wrapperClass="blocks-wrapper"
-          colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+          wrapperClass="MagnifyingGlass-wrapper"
+          glassColor="#2b68c47b"
+          color="#3f51b5"
         />
       )}
     </div>

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 const modalRoot = document.querySelector('#modal-root');
 
-export const Modal = ({ toggleModal, url }) => {
+export const Modal = ({ toggleModal, url, descr }) => {
   useEffect(() => {
     const handleKeydown = e => {
       if (e.code === 'Escape') {
@@ -25,7 +25,8 @@ export const Modal = ({ toggleModal, url }) => {
   return createPortal(
     <div className="Overlay" onClick={handleBackdropClick}>
       <div className="Modal">
-        <img src={url} alt="" />
+        <img src={url} alt={descr} />
+        <p className="description_modal">{descr}</p>
       </div>
     </div>,
     modalRoot
