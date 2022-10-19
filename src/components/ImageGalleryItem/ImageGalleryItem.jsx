@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-
+import css from './ImageGalleryItem.module.css';
 export const ImageGalleryItem = ({
   webformatURL,
   descr,
@@ -11,8 +11,13 @@ export const ImageGalleryItem = ({
   };
 
   return (
-    <li className="ImageGalleryItem">
-      <img src={webformatURL} alt={descr} onClick={handleLargePic} />
+    <li className={css.ImageGalleryItem}>
+      <img
+        src={webformatURL}
+        className={css.ImageGalleryItem_image}
+        alt={descr}
+        onClick={handleLargePic}
+      />
     </li>
   );
 };

@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
 import { MagnifyingGlass } from 'react-loader-spinner';
+import css from './Loader.module.css';
+
 export const Loader = ({ loading }) => {
   return (
-    <div className="Loader">
+    <div className={css.Loader}>
       {loading && (
         <MagnifyingGlass
           visible={true}

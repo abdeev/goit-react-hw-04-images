@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { ReactComponent as IconSearch } from '../../static/img/IconSearch.svg';
 import { toast } from 'react-toastify';
+import css from './Searchbar.module.css';
 
 export const SearchBar = ({ onSubmit }) => {
   const [query, setQuery] = useState('');
@@ -28,14 +29,14 @@ export const SearchBar = ({ onSubmit }) => {
   };
 
   return (
-    <header className="Searchbar">
-      <form className="SearchForm" onSubmit={handleSubmit}>
-        <button type="submit" className="SearchForm-button">
+    <header className={css.Searchbar}>
+      <form className={css.SearchForm} onSubmit={handleSubmit}>
+        <button type="submit" className={css.SearchForm_button}>
           <IconSearch />
         </button>
 
         <input
-          className="SearchForm-input"
+          className={css.SearchForm_input}
           type="text"
           autoComplete="off"
           autoFocus

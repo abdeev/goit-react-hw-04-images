@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import css from './Modal.module.css';
+
 const modalRoot = document.querySelector('#modal-root');
 
 export const Modal = ({ toggleModal, url, descr }) => {
@@ -23,10 +25,10 @@ export const Modal = ({ toggleModal, url, descr }) => {
   };
 
   return createPortal(
-    <div className="Overlay" onClick={handleBackdropClick}>
-      <div className="Modal">
+    <div className={css.Overlay} onClick={handleBackdropClick}>
+      <div className={css.Modal}>
         <img src={url} alt={descr} />
-        <p className="description_modal">{descr}</p>
+        <p className={css.description_modal}>{descr}</p>
       </div>
     </div>,
     modalRoot

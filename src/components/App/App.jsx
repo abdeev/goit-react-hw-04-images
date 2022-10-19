@@ -1,13 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
 
-import { ButtonLoadMore } from './Button/Button';
-import { ImageGallery } from './ImageGallery/ImageGallery';
-import { SearchBar } from './Searchbar/Searchbar';
-import { Loader } from './Loader/Loader';
-import { Modal } from './Modal/Modal';
-import PixabayApi from '../static/api/PixabayApi';
+import { ButtonLoadMore } from '../Button/Button';
+import { ImageGallery } from '../ImageGallery/ImageGallery';
+import { SearchBar } from '../Searchbar/Searchbar';
+import { Loader } from '../Loader/Loader';
+import { Modal } from '../Modal/Modal';
+import PixabayApi from '../../api/PixabayApi';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import css from './App.module.css';
 
 export const App = () => {
   const [pictures, setImages] = useState([]);
@@ -65,12 +66,12 @@ export const App = () => {
   }, [error]);
 
   return (
-    <div className="App">
+    <div className={css.App}>
       <SearchBar onSubmit={onChangeQuery} />
       <div>
         <ImageGallery pictures={pictures} onClick={toggleModal} />
       </div>
-      <span className="Button_wrapper">
+      <span className={css.Button_wrapper}>
         {pictures.length % 12 < 1 && pictures.length > 0 && (
           <ButtonLoadMore onClick={handleClickMoreBtn} />
         )}
